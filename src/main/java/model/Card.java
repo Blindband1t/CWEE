@@ -9,7 +9,11 @@ public class Card {
 
     /*The suit of the card*/
     public enum Suit {
-        SPADES, HEARTHS, CLUBS, DIAMONDS
+        SPADES("spades"), HEARTS("hearts"), CLUBS("clubs"), DIAMONDS("diamonds");
+        String valueToText;
+        Suit(String valueToText){
+            this.valueToText = valueToText;
+        }
     }
 
     public enum Value {
@@ -106,7 +110,9 @@ public class Card {
             return false;
     }
 
+    @Override
     public String toString(){
-        return "bullshit";
+        String msg =  this.value.valueToText + " of " + this.suit.valueToText;
+        return msg;
     }
 }

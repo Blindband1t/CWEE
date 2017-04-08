@@ -24,7 +24,7 @@ public class Deck
         {
             for(int j = 0; j < Card.Value.values().length; j++)
             {
-                //System.out.println(Card.Value.values()[j] + " ============ " + Card.Suit.values()[i]);
+
                 try {
                     cards.add(new Card(Card.Suit.values()[i],Card.Value.values()[j]));
                 } catch (DomainException e) {
