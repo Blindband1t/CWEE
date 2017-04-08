@@ -50,6 +50,12 @@ public class Card
         value = Value.ACE;
     }
 
+    public Card(Suit suit, Value value)
+    {
+        this.setSuit(suit);
+        this.setValue(value);
+    }
+
     public Suit getSuit()
     {
         return suit;
@@ -70,6 +76,14 @@ public class Card
     public Value getValue()
     {
         return value;
+    }
+
+    public void setValue(Value value) throws DomainException{
+        if (value == null)
+        {
+            throw new DomainException("Value can't be null");
+        }
+        this.value = value;
     }
 
 }
