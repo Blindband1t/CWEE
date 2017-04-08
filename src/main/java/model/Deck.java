@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.DomainException;
+
 import java.util.ArrayList;
 
 /**
@@ -12,7 +14,8 @@ public class Deck
 
     public Deck()
     {
-
+        cards =  new ArrayList<Card>();
+        createDeck();
     }
 
     private void createDeck()
@@ -21,8 +24,20 @@ public class Deck
         {
             for(int j = 0; j < Card.Value.values().length; j++)
             {
-                cards.add(new Card())
+                //System.out.println(Card.Value.values()[j] + " ============ " + Card.Suit.values()[i]);
+                try {
+                    cards.add(new Card(Card.Suit.values()[i],Card.Value.values()[j]));
+                } catch (DomainException e) {
+                    System.out.println("EXCEPTION = >" + e.getMessage());
+                }
+
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        String msg = "Deck of Cards: " + cards.toString();
+        return msg;
     }
 }

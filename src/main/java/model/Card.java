@@ -45,11 +45,6 @@ public class Card {
         setValue(value);
     }
 
-    public Card(Suit suit, Value value)
-    {
-        this.setSuit(suit);
-        this.setValue(value);
-    }
 
     public Suit getSuit() {
 
@@ -110,5 +105,9 @@ public class Card {
             return true;
         else
             return false;
+    }
+
+    public String toString(){
+        return "bullshit";
     }
 }
