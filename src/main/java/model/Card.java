@@ -45,12 +45,6 @@ public class Card {
         setValue(value);
     }
 
-    public Card(Suit suit, Value value)
-    {
-        this.setSuit(suit);
-        this.setValue(value);
-    }
-
     public Suit getSuit() {
 
         return suit;
