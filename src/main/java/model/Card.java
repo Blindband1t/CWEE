@@ -45,7 +45,6 @@ public class Card {
         setValue(value);
     }
 
-
     public Suit getSuit() {
 
         return suit;
