@@ -30,6 +30,15 @@ public class Dealer
         Decknew.addAll(deck.getCards().subList(subindex, 52));
         Decknew.addAll(deck.getCards().subList(0, subindex));
         deck.setCards(Decknew);
+
+    }
+
+    public Deck getDeck(){
+        return this.deck;
+    }
+
+    public void creatNewDeck(){
+        deck = new Deck();
     }
 
 
