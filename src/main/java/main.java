@@ -1,3 +1,4 @@
+import model.Dealer;
 import model.Deck;
 
 /**
@@ -7,9 +8,10 @@ public class main
 {
     public static void main (String args[])
     {
-        System.out.println("hello world");
-        Deck d = new Deck();
-        System.out.println(d.toString());
+        Dealer d = new Dealer();
+
+        d.liftDeckOfCards();
+
 
     }
 

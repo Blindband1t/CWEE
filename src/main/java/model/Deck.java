@@ -40,4 +40,19 @@ public class Deck
         String msg = "Deck of Cards: " + cards.toString();
         return msg;
     }
+
+    public ArrayList<Card> getCards(){
+        return this.cards;
+    }
+
+    public void setCards(ArrayList<Card> c ) throws DomainException{
+        if (c == null || c.isEmpty())
+        {
+            throw new DomainException("your set of cards is empty");
+        }
+        this.cards = c;
+    }
+
+
+
 }
