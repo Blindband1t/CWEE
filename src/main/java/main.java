@@ -10,7 +10,7 @@ public class main
     {
         Dealer d = new Dealer();
 
-        d.liftDeckOfCards();
+
 
 
     }

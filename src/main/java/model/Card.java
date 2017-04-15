@@ -49,6 +49,12 @@ public class Card {
         setValue(value);
     }
 
+    public Card(Card card) throws DomainException
+    {
+        setSuit(card.getSuit());
+        setValue(card.getValue());
+    }
+
     public Suit getSuit() {
 
         return suit;

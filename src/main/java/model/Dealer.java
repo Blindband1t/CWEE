@@ -17,19 +17,16 @@ public class Dealer
       deck = new Deck();
     }
 
+    //het schudden van de kaarten word volgens mij het beste gedaan in de Deck klasse
+
     public void shuffleDeck()
     {
-        Collections.shuffle(deck.getCards());
+        deck.shuffle();
     }
 
-    public void liftDeckOfCards() throws DomainException
+    public void cutDeck() throws DomainException
     {
-        int subindex = (int) Math.round(Math.random()*50 + 1);
-        ArrayList<Card> Decknew = new ArrayList<Card>();
-
-        Decknew.addAll(deck.getCards().subList(subindex, 52));
-        Decknew.addAll(deck.getCards().subList(0, subindex));
-        deck.setCards(Decknew);
+        deck.cut();
 
     }
 
