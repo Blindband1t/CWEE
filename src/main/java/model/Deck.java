@@ -24,13 +24,57 @@ public class Deck
         {
             for(int j = 0; j < Card.Value.values().length; j++)
             {
-
                 try {
                     cards.add(new Card(Card.Suit.values()[i],Card.Value.values()[j]));
                 } catch (DomainException e) {
                     System.out.println("EXCEPTION = >" + e.getMessage());
                 }
 
+            }
+        }
+    }
+
+
+    //simuleert het afnemen van de kaarten
+    public void cut()
+    {
+        //copy maken van het spel kaarten
+        ArrayList<Card> tmpDeck = new ArrayList<Card>(cards);
+
+        //Ergens in het midden van het spel een willekurige plaats zoeken om de kaarten af te nemen
+        //TODO: dit kan een sowieso een beetje efficienter
+        int rand  = (int) Math.floor(Math.random() * 16) + 18;
+        int index = 0;
+        //Alle kaarten vanaf de willekeurige locatie op de eerste plaats zetten in het deck
+        for(int i = rand; i < cards.size(); i++)
+        {
+            cards.set(index, tmpDeck.remove(rand));
+            index++;
+        }
+        //Alle kaarten die eerst in het begin stonden vanachter toevoegen aan de rest van de kaarten
+        for(int i = 0; i < rand; i++)
+        {
+            cards.set(index, tmpDeck.remove(0));
+            index++;
+        }
+    }
+
+
+    //simuleert het schudden van de kaarten
+    public void shuffle()
+    {
+        //copy maken van het spel kaarten
+        ArrayList<Card> tmpDeck = new ArrayList<Card>();
+
+        //50x de kaarten random op een andere plaats steken.
+        for(int j = 0; j < 50; j++)
+        {
+            tmpDeck.addAll(cards);
+            //kies een willekeurige kaart uit de overblijvende kaarten en plaats deze achteraan de stapel.
+            for(int i = 0; i < cards.size(); i++)
+            {
+                int rand = (int) Math.floor(Math.random() * tmpDeck.size());
+                cards.set(i, tmpDeck.remove(rand));
             }
         }
     }
