@@ -10,6 +10,7 @@ public class Player
     private String name;
     private String fname;
     private int totalScore;
+    private int currentScore;
     private String email;
     private String password;
 
@@ -91,15 +92,20 @@ public boolean authenticate (String email, String password) throws DomainExcepti
     }
 
     if(password.equals(this.password) && email.equals(this.email)){
-    return true;
+        return true;
     }
 
     return false;
 }
 
 public void addScore(int score){
-    this.totalScore =  this.totalScore + score;
+    this.currentScore += score;
+}
 
+public void resetScore()
+{
+    this.totalScore += this.currentScore;
+    this.currentScore = 0;
 }
 }
 
