@@ -1,4 +1,8 @@
-package endpoint;
+package server;
+
+import exceptions.PacketException;
+import server.SessionHandler;
+import util.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.websocket.*;
@@ -12,16 +16,23 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/actions")
 public class GameEndpoint
 {
+    public SessionHandler sessionHandler;
+
+    public GameEndpoint()
+    {
+        sessionHandler = new SessionHandler();
+    }
+
     @OnOpen
     public void open(Session session)
     {
-
+        sessionHandler.addSession(session);
     }
 
     @OnClose
     public void close(Session session)
     {
-
+        sessionHandler.removeSession(session);
     }
 
     @OnError
@@ -33,6 +44,10 @@ public class GameEndpoint
     @OnMessage
     public void handleMessage(String message, Session session)
     {
-
+        try {
+            sessionHandler.handleMessage(message, session);
+        } catch (PacketException e) {
+            Logger.print_err(e);
+        }
     }
 }

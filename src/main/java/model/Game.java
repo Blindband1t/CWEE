@@ -2,33 +2,35 @@ package model;
 
 import exceptions.DomainException;
 
+import javax.websocket.Session;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Lukas on 8-4-2017.
  */
 public class Game
 {
-
     private static final int PLAYERS_PER_GAME = 4;
-
     private Date startDate;
-    private ArrayList<Player> players;
+    private HashMap<Session, Player> players;
+    private ArrayList<Session> playerOrder;
     private int activePlayerIndex;
     private boolean started = false;
 
     public Game()
     {
         startDate = new Date(System.currentTimeMillis());
-        players = new ArrayList<Player>();
+        players = new HashMap<>();
+        playerOrder = new ArrayList<>();
         activePlayerIndex = 0;
     }
 
     public Player getActivePlayer() throws DomainException
     {
         if(started)
-            return players.get(activePlayerIndex);
+            return players.get(playerOrder.get(activePlayerIndex));
         else
             throw new DomainException("Cannot get the player if the game has not been started");
     }
@@ -63,21 +65,6 @@ public class Game
         this.startDate = startDate;
     }
 
-    public static int getPlayersPerGame()
-    {
-        return PLAYERS_PER_GAME;
-    }
-
-    public ArrayList<Player> getPlayers()
-    {
-        return players;
-    }
-
-    public void setPlayers(ArrayList<Player> players)
-    {
-        this.players = players;
-    }
-
     public int getActivePlayerIndex()
     {
         return activePlayerIndex;
@@ -86,15 +73,5 @@ public class Game
     public void setActivePlayerIndex(int activePlayerIndex)
     {
         this.activePlayerIndex = activePlayerIndex;
-    }
-
-    public boolean isStarted()
-    {
-        return started;
-    }
-
-    public void setStarted(boolean started)
-    {
-        this.started = started;
     }
 }

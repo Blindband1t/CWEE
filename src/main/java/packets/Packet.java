@@ -5,31 +5,33 @@ package packets;
  */
 public class Packet
 {
-    private Byte type;
-    private Byte[] data;
+    private byte type;
+    private byte[] data;
 
-    public Packet(Byte type, Byte[] data)
+    public Packet() {}
+
+    public Packet(byte type, byte[] data)
     {
         setType(type);
         setData(data);
     }
 
-    public Byte getType()
+    public byte getType()
     {
         return type;
     }
 
-    public void setType(Byte type)
+    public void setType(byte type)
     {
         this.type = type;
     }
 
-    public Byte[] getData()
+    public byte[] getData()
     {
         return data;
     }
 
-    public void setData(Byte[] data)
+    public void setData(byte[] data)
     {
         this.data = data;
     }

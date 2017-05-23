@@ -1,16 +1,14 @@
 package server;
 
-import model.Device;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import sun.util.logging.PlatformLogger;
+import exceptions.PacketException;
+import packets.Packet;
+import packets.PacketDecryptor;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.json.JsonObject;
 import javax.websocket.Session;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,9 +20,7 @@ import java.util.logging.Logger;
 @ApplicationScoped
 public class SessionHandler
 {
-    private int deviceId = 0;
-    private final Set<Session> sessions = new HashSet<Session>();
-    private final Set<Device> devices = new HashSet<Device>();
+    private final Set<Session> sessions = new HashSet<>();
 
     public void addSession(Session session)
     {
@@ -36,41 +32,7 @@ public class SessionHandler
         sessions.remove(session);
     }
 
-    public List<Device> getDevices()
-    {
-        return new ArrayList<Device>(devices);
-    }
-
-    public void addDevice(Device device)
-    {
-//        device.setId(deviceId++);
-//        devices.add(device);
-//        JsonObject addMessage = createAddMessage(device);
-//        sendToAllConnectedSessions(addMessage);
-        throw new NotImplementedException();
-    }
-
-    public void removeDevice(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void toggleDevice(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Device getDeviceById(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    private JsonObject createAddMessage(Device device)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void sendToAllConnectedSessions(JsonObject message)
+    public void sendToAllConnectedSessions(byte[] message)
     {
         for(Session session : sessions)
         {
@@ -78,7 +40,7 @@ public class SessionHandler
         }
     }
 
-    private void sendToSession(Session session, JsonObject message)
+    public void sendToSession(Session session, byte[] message)
     {
         try
         {
@@ -89,5 +51,11 @@ public class SessionHandler
             sessions.remove(session);
             Logger.getLogger(SessionHandler.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    public void handleMessage(String message, Session session) throws PacketException
+    {
+        Packet packet = PacketDecryptor.decrypt( message.getBytes());
+
     }
 }
