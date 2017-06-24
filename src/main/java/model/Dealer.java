@@ -38,5 +38,4 @@ public class Dealer
         deck = new Deck();
     }
 
-
 }

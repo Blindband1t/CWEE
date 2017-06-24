@@ -5,5 +5,13 @@ package server;
  */
 public class GameHandler
 {
+    private PlayerHandler playerHandler;
 
+
+    public GameHandler()
+    {
+        playerHandler = new PlayerHandler();
+    }
+
+    public void registerPlayer()
 }

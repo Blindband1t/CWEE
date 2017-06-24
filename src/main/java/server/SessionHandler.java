@@ -1,8 +1,10 @@
 package server;
 
+import exceptions.DomainException;
 import exceptions.PacketException;
-import packets.Packet;
 import packets.PacketDecryptor;
+import packets.PacketFactory;
+import packets.PacketType;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.json.JsonObject;
@@ -21,6 +23,7 @@ import java.util.logging.Logger;
 public class SessionHandler
 {
     private final Set<Session> sessions = new HashSet<>();
+    private GameHandler gameHandler = new GameHandler();
 
     public void addSession(Session session)
     {
@@ -32,7 +35,7 @@ public class SessionHandler
         sessions.remove(session);
     }
 
-    public void sendToAllConnectedSessions(byte[] message)
+    public void sendToAllConnectedSessions(Byte[] message)
     {
         for(Session session : sessions)
         {
@@ -40,7 +43,7 @@ public class SessionHandler
         }
     }
 
-    public void sendToSession(Session session, byte[] message)
+    public void sendToSession(Session session, Byte[] message)
     {
         try
         {
@@ -53,9 +56,18 @@ public class SessionHandler
         }
     }
 
-    public void handleMessage(String message, Session session) throws PacketException
+    public void handleMessage(String message, Session session) throws DomainException, PacketException
     {
-        Packet packet = PacketDecryptor.decrypt( message.getBytes());
-
+        Byte type = PacketDecryptor.getPacketType(message.getBytes());
+        switch (type)
+        {
+            case PacketType.REGISTER_PLAYER:
+                PacketFactory.registerPlayer(session, message);
+                gameHandler.registerPlayer();
+                break;
+            default:
+                return;
+        }
     }
+
 }

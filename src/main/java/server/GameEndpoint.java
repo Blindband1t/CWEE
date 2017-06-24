@@ -44,10 +44,6 @@ public class GameEndpoint
     @OnMessage
     public void handleMessage(String message, Session session)
     {
-        try {
-            sessionHandler.handleMessage(message, session);
-        } catch (PacketException e) {
-            Logger.print_err(e);
-        }
+        sessionHandler.handleMessage(message, session);
     }
 }

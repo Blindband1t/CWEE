@@ -2,35 +2,35 @@ package model;
 
 import exceptions.DomainException;
 
-import javax.websocket.Session;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Lukas on 8-4-2017.
  */
-public class Game
-{
+public class Game {
     private static final int PLAYERS_PER_GAME = 4;
     private Date startDate;
-    private HashMap<Session, Player> players;
-    private ArrayList<Session> playerOrder;
+    private ArrayList<Player> players;
     private int activePlayerIndex;
     private boolean started = false;
 
-    public Game()
-    {
+    public Game() {
         startDate = new Date(System.currentTimeMillis());
-        players = new HashMap<>();
-        playerOrder = new ArrayList<>();
+        players = new ArrayList<>();
         activePlayerIndex = 0;
+    }
+
+    public List<Player> getPlayers()
+    {
+        return players;
     }
 
     public Player getActivePlayer() throws DomainException
     {
         if(started)
-            return players.get(playerOrder.get(activePlayerIndex));
+            return players.get(activePlayerIndex);
         else
             throw new DomainException("Cannot get the player if the game has not been started");
     }

@@ -36,4 +36,9 @@ public class PacketDecryptor
             data[i - 1] = packetString[i];
         return data;
     }
+
+    public static Byte getPacketType(byte[] packetString)
+    {
+        return packetString[0];
+    }
 }
