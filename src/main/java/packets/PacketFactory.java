@@ -13,6 +13,16 @@ import javax.websocket.Session;
  */
 public class PacketFactory
 {
+    public static DecodedPackage getPackage(Session session, String message) throws DomainException, PacketException
+    {
+        Byte type = PacketDecryptor.getPacketType(message.getBytes());
+
+        if(type.equals(PacketType.REGISTER_PLAYER))
+            return registerPlayer(session, message);
+
+        return null;
+    }
+
     public static PlayerRegisterPacket registerPlayer(Session session, String message) throws PacketException, DomainException
     {
         Packet packet = PacketDecryptor.decrypt( message.getBytes());
@@ -22,4 +32,5 @@ public class PacketFactory
         decodedPackage.setPlayer(player);
         return decodedPackage;
     }
+
 }

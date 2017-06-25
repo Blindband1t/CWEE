@@ -2,7 +2,9 @@ package server;
 
 import model.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by lukas on 27-5-2017.
@@ -31,5 +33,10 @@ public class PlayerHandler
     public Player getPlayer(String sessionID)
     {
         return players.get(sessionID);
+    }
+
+    public List<Player> getPlayers()
+    {
+        return new ArrayList<>(players.values());
     }
 }

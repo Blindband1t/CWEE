@@ -31,7 +31,8 @@ public class Player
         return this.name;
     }
 
-    private void setTotalScore(int totalScore){
+    private void setTotalScore(int totalScore)
+    {
         this.totalScore = totalScore;
     }
 
@@ -64,7 +65,8 @@ public class Player
 //        return false;
 //    }
 
-    public void addScore(int score){
+    public void addScore(int score)
+    {
         this.currentScore += score;
     }
 

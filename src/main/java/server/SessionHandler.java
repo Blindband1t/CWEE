@@ -2,12 +2,10 @@ package server;
 
 import exceptions.DomainException;
 import exceptions.PacketException;
-import packets.PacketDecryptor;
 import packets.PacketFactory;
-import packets.PacketType;
+import packets.decodedPackages.DecodedPackage;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.json.JsonObject;
 import javax.websocket.Session;
 import java.io.IOException;
 import java.util.HashSet;
@@ -58,16 +56,12 @@ public class SessionHandler
 
     public void handleMessage(String message, Session session) throws DomainException, PacketException
     {
-        Byte type = PacketDecryptor.getPacketType(message.getBytes());
-        switch (type)
-        {
-            case PacketType.REGISTER_PLAYER:
-                PacketFactory.registerPlayer(session, message);
-                gameHandler.registerPlayer();
-                break;
-            default:
-                return;
-        }
+        DecodedPackage packet = PacketFactory.getPackage(session, message);
+        packet.executeTask(gameHandler);
     }
 
+    public GameHandler getGameHandler()
+    {
+        return gameHandler;
+    }
 }

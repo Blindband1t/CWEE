@@ -1,7 +1,10 @@
 package packets.decodedPackages;
 
 import model.Player;
+import server.GameHandler;
+import server.SessionHandler;
 
+import javax.websocket.SendHandler;
 import javax.websocket.Session;
 
 /**
@@ -27,5 +30,11 @@ public class PlayerRegisterPacket extends DecodedPackage
     public Player getPlayer()
     {
         return player;
+    }
+
+    @Override
+    public void executeTask(SessionHandler sessionHandler)
+    {
+        sessionHandler.getGameHandler().registerPlayer(getOrigin(), player);
     }
 }

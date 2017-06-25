@@ -1,5 +1,8 @@
 package packets.decodedPackages;
 
+import server.GameHandler;
+import server.SessionHandler;
+
 import javax.websocket.Session;
 
 /**
@@ -8,6 +11,7 @@ import javax.websocket.Session;
 public class DecodedPackage
 {
     private Session origin;
+    private String message;
 
     public DecodedPackage() {}
 
@@ -24,5 +28,10 @@ public class DecodedPackage
     public Session getOrigin()
     {
         return origin;
+    }
+
+    public void executeTask(SessionHandler sessionHandler)
+    {
+
     }
 }

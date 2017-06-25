@@ -1,5 +1,6 @@
 package server;
 
+import exceptions.DomainException;
 import exceptions.PacketException;
 import server.SessionHandler;
 import util.Logger;
@@ -44,6 +45,12 @@ public class GameEndpoint
     @OnMessage
     public void handleMessage(String message, Session session)
     {
-        sessionHandler.handleMessage(message, session);
+        try {
+            sessionHandler.handleMessage(message, session);
+        } catch (DomainException e) {
+            e.printStackTrace();
+        } catch (PacketException e) {
+            e.printStackTrace();
+        }
     }
 }
