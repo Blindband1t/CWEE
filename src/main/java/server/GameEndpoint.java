@@ -2,8 +2,6 @@ package server;
 
 import exceptions.DomainException;
 import exceptions.PacketException;
-import server.SessionHandler;
-import util.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.websocket.*;

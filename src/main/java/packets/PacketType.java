@@ -6,11 +6,13 @@ package packets;
 public class PacketType
 {
     public static final Byte REGISTER_PLAYER = 0x01;
-    public static final Byte PLAYER_LIST = 0x02;
+    public static final Byte DISCONNECT_PLAYER = 0x02;
+    public static final Byte PLAYER_LIST = 0x03;
 
     public static final Byte[] actions =
     {
         REGISTER_PLAYER,
-        PLAYER_LIST,
+        DISCONNECT_PLAYER,
+        PLAYER_LIST
     };
 }

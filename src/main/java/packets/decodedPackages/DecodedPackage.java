@@ -10,8 +10,8 @@ import javax.websocket.Session;
  */
 public class DecodedPackage
 {
-    private Session origin;
-    private String message;
+    protected Session origin;
+    protected String message;
 
     public DecodedPackage() {}
 

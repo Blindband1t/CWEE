@@ -33,7 +33,7 @@ public class SessionHandler
         sessions.remove(session);
     }
 
-    public void sendToAllConnectedSessions(Byte[] message)
+    public void sendToAllConnectedSessions(byte[] message)
     {
         for(Session session : sessions)
         {
@@ -41,7 +41,7 @@ public class SessionHandler
         }
     }
 
-    public void sendToSession(Session session, Byte[] message)
+    public void sendToSession(Session session, byte[] message)
     {
         try
         {
@@ -57,7 +57,7 @@ public class SessionHandler
     public void handleMessage(String message, Session session) throws DomainException, PacketException
     {
         DecodedPackage packet = PacketFactory.getPackage(session, message);
-        packet.executeTask(gameHandler);
+        packet.executeTask(this);
     }
 
     public GameHandler getGameHandler()
